@@ -9,7 +9,7 @@ Trains a `MultinomialNB` model to label SMS messages as legitimate ("ham") or sp
 ## Dataset
 
 - **Source:** [SMS Spam Collection](https://raw.githubusercontent.com/justmarkham/pycon-2016-tutorial/master/data/sms.tsv)
-- **Size:** 5,574 labeled SMS messages
+- **Size:** 5,572 labeled SMS messages
 - The script downloads the dataset automatically on first run and caches it locally as `sms.tsv`.
 
 ## Pipeline
@@ -39,9 +39,24 @@ Evaluated on a held-out test set of 1,115 messages:
 - pandas
 - scikit-learn (`CountVectorizer`, `MultinomialNB`, `train_test_split`)
 
+## Project Structure
+
+- `spam_classifier.py` - data loading, feature extraction, split, training, evaluation and prediction functions
+- `main.py` - runs the full pipeline and prints the results
+- `tests/test_spam_classifier.py` - automated pytest suite
+
 ## Getting Started
 
 ```bash
 pip install -r requirements.txt
 python main.py
 ```
+
+## Testing
+
+```bash
+pip install -r requirements-dev.txt
+pytest
+```
+
+The suite covers data loading and label mapping, Bag-of-Words features, a stratified and reproducible split, the exact confusion matrix and metric thresholds, spam/ham predictions, and the dataset download logic (mocked, no network needed).
